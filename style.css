@@ -1,0 +1,181 @@
+/* ================= GLOBAL ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom right, #fbc2eb, #a6c1ee);
+    min-height: 100vh;
+}
+
+/* ================= HEADERS ================= */
+h1, h2 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    margin-top: 20px;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ================= NAVIGATION MENU ================= */
+.menu {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.menu a {
+    margin: 5px;
+    padding: 10px 16px;
+    display: inline-block;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(to right, #ff4b1f, #ff9068);
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    transform: scale(1.08);
+    background: linear-gradient(to right, #56ccf2, #2f80ed);
+}
+
+/* ================= TABLE ================= */
+table {
+    width: 95%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+th {
+    background: #2ecc71;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #f2f2f2;
+}
+
+/* ================= FORMS ================= */
+form {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+input:focus {
+    border-color: #2f80ed;
+}
+
+/* ================= BUTTON SYSTEM ================= */
+.btn {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+/* ADD */
+.btn-add {
+    background: #4CAF50;
+}
+
+/* EDIT */
+.btn-edit {
+    background: #2196F3;
+}
+
+/* ARCHIVE */
+.btn-archive {
+    background: #ff9800;
+}
+
+/* DELETE */
+.btn-delete {
+    background: #e74c3c;
+}
+
+/* BACK */
+.btn-back {
+    background: #9b59b6;
+}
+
+/* HOVER EFFECT */
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* ================= LOGIN BOX ================= */
+.login-box {
+    background: white;
+    width: 300px;
+    margin: 100px auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.login-box h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* LOGIN BUTTON */
+button {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ERROR MESSAGE */
+.error {
+    color: red;
+    margin-top: 10px;
+}
