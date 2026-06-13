@@ -11,6 +11,15 @@ $page = $_GET['action'] ?? 'view';
 /* ================= ADD ================= */
 if (isset($_POST['add_student'])) {
 
+    $first = $_POST['FirstName'];
+    $last = $_POST['LastName'];
+
+    // 🔒 VALIDATION: no numbers/symbols in names
+    if (!preg_match("/^[a-zA-Z\s]+$/", $first) || !preg_match("/^[a-zA-Z\s]+$/", $last)) {
+        echo "<script>alert('Names must only contain letters!'); window.history.back();</script>";
+        exit();
+    }
+
     $stmt = $conn->prepare("
         INSERT INTO Students 
         (FirstName, LastName, Age, Address, Contact, Course, Gender, YearLevel)
@@ -19,8 +28,8 @@ if (isset($_POST['add_student'])) {
 
     $stmt->bind_param(
         "ssisssss",
-        $_POST['FirstName'],
-        $_POST['LastName'],
+        $first,
+        $last,
         $_POST['Age'],
         $_POST['Address'],
         $_POST['Contact'],
@@ -37,6 +46,15 @@ if (isset($_POST['add_student'])) {
 /* ================= UPDATE ================= */
 if (isset($_POST['update_student'])) {
 
+    $first = $_POST['FirstName'];
+    $last = $_POST['LastName'];
+
+    // 🔒 VALIDATION AGAIN
+    if (!preg_match("/^[a-zA-Z\s]+$/", $first) || !preg_match("/^[a-zA-Z\s]+$/", $last)) {
+        echo "<script>alert('Names must only contain letters!'); window.history.back();</script>";
+        exit();
+    }
+
     $stmt = $conn->prepare("
         UPDATE Students SET
         FirstName=?, LastName=?, Age=?, Address=?, Contact=?, Course=?, Gender=?, YearLevel=?
@@ -45,8 +63,8 @@ if (isset($_POST['update_student'])) {
 
     $stmt->bind_param(
         "ssisssssi",
-        $_POST['FirstName'],
-        $_POST['LastName'],
+        $first,
+        $last,
         $_POST['Age'],
         $_POST['Address'],
         $_POST['Contact'],
@@ -73,7 +91,7 @@ if ($page == "archive") {
     exit();
 }
 
-/* ================= EDIT DATA ================= */
+/* ================= EDIT ================= */
 $row = null;
 
 if ($page == "edit") {
@@ -87,7 +105,6 @@ if ($page == "edit") {
 <html>
 <head>
 <title>Students</title>
-<link rel="stylesheet" href="style.css">
 
 <style>
 body {
@@ -96,7 +113,6 @@ body {
     background: linear-gradient(135deg, #74ebd5, #ACB6E5);
 }
 
-/* TOP BAR */
 .header {
     text-align: center;
     padding: 20px;
@@ -106,7 +122,6 @@ body {
     text-shadow: 2px 2px 5px black;
 }
 
-/* NAV BAR */
 .nav {
     text-align: center;
     margin-bottom: 10px;
@@ -128,13 +143,11 @@ body {
     transform: scale(1.05);
 }
 
-/* container */
 .container {
     width: 95%;
     margin: auto;
 }
 
-/* buttons */
 .btn {
     padding: 6px 12px;
     border-radius: 6px;
@@ -143,18 +156,12 @@ body {
     margin: 2px;
     display: inline-block;
     font-size: 13px;
-    transition: 0.2s;
-}
-
-.btn:hover {
-    transform: scale(1.05);
 }
 
 .add-btn { background: #27ae60; }
 .edit-btn { background: #f39c12; }
 .archive-btn { background: #e74c3c; }
 
-/* table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -178,7 +185,6 @@ td {
     font-size: 13px;
 }
 
-/* form card */
 .card {
     background: white;
     padding: 20px;
@@ -187,7 +193,6 @@ td {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* inputs */
 input {
     padding: 10px;
     margin: 5px;
@@ -196,7 +201,6 @@ input {
     border-radius: 6px;
 }
 
-/* submit button */
 button {
     padding: 10px 15px;
     border: none;
@@ -210,7 +214,6 @@ button:hover {
     background: #2980b9;
 }
 
-/* BACK BUTTON */
 .back {
     display: inline-block;
     margin: 10px 0;
@@ -220,20 +223,15 @@ button:hover {
     border-radius: 8px;
     text-decoration: none;
 }
-.back:hover {
-    background: #333;
-}
 </style>
 </head>
 
 <body>
 
-<div class="header">STUDENT MANAGEMENT </div>
+<div class="header">STUDENT MANAGEMENT</div>
 
-<!-- NAVIGATION -->
 <div class="nav">
     <a href="index.php">🏠 Back to Main Menu</a>
-    
     <a href="students.php?action=add">➕ Add Student</a>
 </div>
 
@@ -247,8 +245,8 @@ button:hover {
 <h2>Add Student</h2>
 
 <form method="POST">
-<input name="FirstName" placeholder="First Name" required>
-<input name="LastName" placeholder="Last Name" required>
+<input name="FirstName" placeholder="First Name" required pattern="[A-Za-z\s]+">
+<input name="LastName" placeholder="Last Name" required pattern="[A-Za-z\s]+">
 <input name="Age" placeholder="Age" required>
 <input name="Address" placeholder="Address" required>
 <input name="Contact" placeholder="Contact" required>
@@ -271,8 +269,8 @@ button:hover {
 <form method="POST">
 <input type="hidden" name="id" value="<?= $row['StudentID'] ?>">
 
-<input name="FirstName" value="<?= $row['FirstName'] ?>">
-<input name="LastName" value="<?= $row['LastName'] ?>">
+<input name="FirstName" value="<?= $row['FirstName'] ?>" pattern="[A-Za-z\s]+">
+<input name="LastName" value="<?= $row['LastName'] ?>" pattern="[A-Za-z\s]+">
 <input name="Age" value="<?= $row['Age'] ?>">
 <input name="Address" value="<?= $row['Address'] ?>">
 <input name="Contact" value="<?= $row['Contact'] ?>">

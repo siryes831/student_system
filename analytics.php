@@ -297,7 +297,7 @@ if ($res->num_rows > 0):
 
 <!-- ================= AT-RISK STUDENTS ================= -->
 <div class="card">
-<h2>At-Risk Students 🔴 (3.5 - 5.0)</h2>
+<h2>At-Risk Students 🔴 (3.0 - 5.0)</h2>
 
 <table>
 <tr><th>Student</th><th>Average Grade</th></tr>
@@ -309,7 +309,7 @@ ROUND(AVG(Grades.average), 2) AS avg_grade
 FROM Grades
 JOIN Students ON Grades.student_id = Students.StudentID
 GROUP BY Students.StudentID
-HAVING AVG(Grades.average) >= 3.5
+HAVING AVG(Grades.average) >= 3.0
 ORDER BY avg_grade DESC
 ");
 
